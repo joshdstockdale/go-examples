@@ -1,8 +1,7 @@
-package main
+package group
 
 import (
 	"fmt"
-	"runtime"
 	"sync"
 )
 
@@ -10,17 +9,10 @@ type Thing struct{
 	id int
 }
 
-
 var wg sync.WaitGroup
 //var m sync.Mutex
 
-func main(){
-	ts := []Thing{
-		{id: 1},{id: 2},{id: 3},{id: 4},{id: 5},{id: 6},{id: 7},{id: 8},{id: 9},{id: 10},
-	}
-
-	throttle := 3
-	//wg.Add(throttle)
+func GroupIt(ts []Thing, throttle int){
 
 	var groups [][]Thing
 	for counter:=0; counter < len(ts); counter=counter+throttle{
@@ -37,7 +29,6 @@ func main(){
 		wg.Add(len(g))
 
 		for _,t := range g{
-
 			go dothing(t)
 		}
 		wg.Wait()
@@ -45,9 +36,7 @@ func main(){
 
 }
 func dothing(t Thing){
-	fmt.Println("Goroutines\t", runtime.NumGoroutine())
 
-	fmt.Println("Doing the thing...")
-	fmt.Println(t.id)
+	fmt.Printf("%v,",t.id)
 	wg.Done()
 }
