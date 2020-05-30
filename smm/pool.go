@@ -18,7 +18,7 @@ func main(){
 		{id: 1},{id: 2},{id: 3},{id: 4},{id: 5},{id: 6},{id: 7},{id: 8},{id: 9},{id: 10},
 	}
 
-	throttle := 2-1
+	throttle := 3
 	wg.Add(throttle)
 
 	for i:=0; i < throttle; i++{
@@ -39,7 +39,7 @@ func doit(ts []Thing, s string){
 	reallydoit(ts)
 }
 func reallydoit(ts []Thing){
-	fmt.Println("Counter\t\t", counter)
+	fmt.Println("Counter\t", counter)
 	if counter < len(ts) {
 		fmt.Println(ts[counter].id)
 	}
